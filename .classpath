@@ -20,7 +20,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-jdbc-4.0.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-orm-4.0.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-tx-4.0.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-web-4.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-web-4.0.1.RELEASE.jar" sourcepath="C:/Users/hangyang/.m2/repository/org/springframework/spring-web/4.0.1.RELEASE/spring-web-4.0.1.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-4.0.1.RELEASE.jar" sourcepath="F:/OpenSource/spring-framework-4.0.1.RELEASE-dist.zip">
 		<attributes>
 			<attribute name="source_encoding" value="UTF-8"/>
@@ -34,5 +34,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.5.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-all-1.9.11.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

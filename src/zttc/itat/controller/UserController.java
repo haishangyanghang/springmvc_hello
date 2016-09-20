@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import zttc.itat.model.User;
@@ -56,7 +58,7 @@ public class UserController {
 	
 	//具体添加用户时是POST请求，访问此段代码
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public String add(@Validated User user,BindingResult br,MultipartFile[] attachs,HttpServletRequest req) throws IOException{//BindingResult一定要紧跟着@Validated来写
+	public String add(@Validated User user,BindingResult br,@RequestParam("attachs")MultipartFile [] attachs,HttpServletRequest req) throws IOException{//BindingResult一定要紧跟着@Validated来写
 		//如果有错误，则跳转到add视图
 		if(br.hasErrors()){
 			return "user/add";
@@ -64,11 +66,11 @@ public class UserController {
 		String realpath=req.getSession().getServletContext().getRealPath("/resources/upload");
 		System.out.println(realpath);
 		for(MultipartFile attach:attachs){
+		 if(attach.isEmpty()) continue;  //如果上传文件为空，则跳过文件上传
 		  File f=new File(realpath+"/"+attach.getOriginalFilename());
 		  FileUtils.copyInputStreamToFile(attach.getInputStream(), f);
-		  System.out.println(attach.getName()+","+attach.getOriginalFilename()+","+attach.getContentType());
 		}
-		users.put(user.getUsername(),user);
+		users.put(user.getUsername(),user);//将user对象添加到users页面
 		return "redirect:/user/users";  //客户端跳转
 	}
 	
@@ -76,6 +78,12 @@ public class UserController {
 	public String show(@PathVariable String username,Model model){  //“user/users”页面下，点击username可跳转到链接“username”
 		model.addAttribute(users.get(username));  //添加username对象信息到页面
 		return "user/show";//返回到“show”页面
+	}
+	
+	@RequestMapping(value="/{username}",method=RequestMethod.GET,params="jason")  //通过jason来访问页面
+	@ResponseBody
+	public User show(@PathVariable String username){  //“user/users”页面下，点击username可跳转到链接“username”
+		return users.get(username);
 	}
 	
 	@RequestMapping(value="/{username}/update",method=RequestMethod.GET)
